@@ -1,0 +1,278 @@
+// src/data/cars.js
+export const carData = [
+  {
+    id: 1,
+    name: "Hyundai Ioniq 5",
+    brand: "Hyundai",
+    category: "Electric",
+    price: "Rp 850.000.000",
+    engine: "Electric Motor",
+    horsepower: "217 HP",
+    image_url: "https://www.hyundai.com/content/dam/hyundai/id/id/images/local/ioniq5/id/hightlight/ioniq5-banner-d-1920X1080.jpg",
+    description: "Mobil listrik futuristik dengan fitur V2L dan desain retro-modern yang ikonik."
+  },
+  {
+    id: 2,
+    name: "Wuling Air EV Long Range",
+    brand: "Wuling",
+    category: "Electric",
+    price: "Rp 299.500.000",
+    engine: "Electric Motor",
+    horsepower: "40 HP",
+    image_url: "https://arista-group.co.id/wp-content/uploads/2023/07/Air-EV-Long-Range-Pristine-White.webp",
+    description: "Solusi mobilitas perkotaan yang praktis, hemat energi, dan mudah diparkir."
+  },
+  {
+    id: 3,
+    name: "Toyota Innova Zenix Hybrid",
+    brand: "Toyota",
+    category: "Hybrid",
+    price: "Rp 611.000.000",
+    engine: "2.0L Hybrid System",
+    horsepower: "186 HP",
+    image_url: "https://images.prod.seva.id/Toyota/All%20New%20Kijang%20Innova%20Zenix/main_color/Zenix_main_black_transparent.png",
+    description: "MPV keluarga legendaris kini hadir dengan teknologi hybrid yang jauh lebih efisien."
+  },
+  {
+    id: 4,
+    name: "Tesla Model 3 Highland",
+    brand: "Tesla",
+    category: "Electric",
+    price: "Rp 1.500.000.000",
+    engine: "Electric Motor",
+    horsepower: "283 HP",
+    image_url: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800",
+    description: "Sedan listrik paling populer dengan facelift terbaru, interior minimalis, dan jarak tempuh impresif."
+  },
+  {
+    id: 5,
+    name: "Lexus RX 350h Luxury",
+    brand: "Lexus",
+    category: "Hybrid",
+    price: "Rp 1.700.000.000",
+    engine: "2.5L Hybrid",
+    horsepower: "246 HP",
+    image_url: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800",
+    description: "SUV mewah yang menawarkan kenyamanan kabin kelas satu dan keheningan mesin hybrid."
+  },
+  {
+    id: 6,
+    name: "Hyundai Ioniq 6",
+    brand: "Hyundai",
+    category: "Electric",
+    price: "Rp 1.220.000.000",
+    engine: "Dual Motor AWD",
+    horsepower: "320 HP",
+    image_url: "https://www.hyundai.com/content/dam/hyundai/id/id/images/local/ioniq6/KV_Ionic-6_D_Home-Banner_1860x720.png",
+    description: "Electrified Streamliner dengan aerodinamika luar biasa untuk efisiensi maksimal."
+  },
+  {
+    id: 7,
+    name: "BMW iX xDrive40",
+    brand: "BMW",
+    category: "Electric",
+    price: "Rp 2.488.000.000",
+    engine: "Dual Electric Motor",
+    horsepower: "326 HP",
+    image_url: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800",
+    description: "SUV listrik flagship BMW dengan desain interior lounge yang sangat mewah dan material daur ulang."
+  },
+  {
+    id: 8,
+    name: "MG 4 EV",
+    brand: "MG",
+    category: "Electric",
+    price: "Rp 429.000.000",
+    engine: "RWD Electric Motor",
+    horsepower: "170 HP",
+    image_url: "https://www.mg-mobil.com/file/20241102224312_m.jpeg",
+    description: "Hatchback listrik dengan handling fun-to-drive berkat penggerak roda belakang (RWD)."
+  },
+  {
+    id: 9,
+    name: "Toyota bZ4X",
+    brand: "Toyota",
+    category: "Electric",
+    price: "Rp 1.190.000.000",
+    engine: "Electric Motor",
+    horsepower: "204 HP",
+    image_url: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&w=800",
+    description: "Langkah serius Toyota di segmen BEV dengan platform e-TNGA yang kokoh."
+  },
+  {
+    id: 10,
+    name: "Nissan Kicks e-Power",
+    brand: "Nissan",
+    category: "Hybrid",
+    price: "Rp 519.000.000",
+    engine: "e-Power System",
+    horsepower: "136 HP",
+    image_url: "https://storage.googleapis.com/prod-nissan-indonesia/3840_X_1975_Kicks_2022_Top_Banner_copy_2bdf7622f8/3840_X_1975_Kicks_2022_Top_Banner_copy_2bdf7622f8.jpg",
+    description: "Mobil listrik tanpa perlu charging. Mesin bensin hanya berfungsi sebagai generator baterai."
+  },
+  {
+    id: 11,
+    name: "Honda CR-V e:HEV",
+    brand: "Honda",
+    category: "Hybrid",
+    price: "Rp 814.000.000",
+    engine: "2.0L Hybrid",
+    horsepower: "207 HP",
+    image_url: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=800",
+    description: "SUV premium dengan sistem hybrid canggih yang bertenaga namun tetap irit."
+  },
+  {
+    id: 12,
+    name: "Chery Omoda E5",
+    brand: "Chery",
+    category: "Electric",
+    price: "Rp 498.000.000",
+    engine: "Electric Motor",
+    horsepower: "204 HP",
+    image_url: "https://cheryidn.sgp1.cdn.digitaloceanspaces.com/prod/product-models/omoda/product-types/omoda-e5/E5-new-banner-desktop-latest.png",
+    description: "Desain futuristik dengan performa akselerasi instan dan fitur ADAS lengkap."
+  },
+  {
+    id: 13,
+    name: "Kia EV9 GT-Line",
+    brand: "Kia",
+    category: "Electric",
+    price: "Rp 1.975.000.000",
+    engine: "Dual Motor AWD",
+    horsepower: "380 HP",
+    image_url: "https://i.gaw.to/content/photos/60/15/601552-kia-ev9-gt-line-2024.jpeg",
+    description: "SUV listrik bongsor 3 baris dengan desain kotak yang gagah dan fitur super canggih."
+  },
+  {
+    id: 14,
+    name: "Porsche Taycan",
+    brand: "Porsche",
+    category: "Electric",
+    price: "Rp 2.900.000.000",
+    engine: "Electric Motor",
+    horsepower: "402 HP",
+    image_url: "https://cdn.motor1.com/images/mgl/pb4p8P/s1/2025-porsche-taycan.jpg",
+    description: "Sportscar listrik murni yang menawarkan sensasi berkendara khas Porsche tanpa emisi."
+  },
+  {
+    id: 15,
+    name: "Mitsubishi Xpander HEV",
+    brand: "Mitsubishi",
+    category: "Hybrid",
+    price: "Rp 360.000.000",
+    engine: "1.6L Hybrid",
+    horsepower: "114 HP",
+    image_url: "https://www.mitsurma.com/wp-content/uploads/2024/02/xpandercrosshev-highlight-home-banner.jpg",
+    description: "MPV sejuta umat kini hadir dengan teknologi hybrid (rilis Thailand/Global)."
+  },
+  {
+    id: 16,
+    name: "Volvo XC90 Recharge",
+    brand: "Volvo",
+    category: "Hybrid",
+    price: "Rp 1.800.000.000",
+    engine: "T8 AWD Plug-in Hybrid",
+    horsepower: "462 HP",
+    image_url: "https://smartcdn.gprod.postmedia.digital/driving/wp-content/uploads/2024/01/2024-Volvo-XC90-Recharge-Review-Exterior-Front3Q1-scaled.jpg",
+    description: "SUV Swedia teraman dengan tenaga buas dari mesin Plug-in Hybrid."
+  },
+  {
+    id: 17,
+    name: "BYD Seal Performance",
+    brand: "BYD",
+    category: "Electric",
+    price: "Rp 719.000.000",
+    engine: "Dual Motor AWD",
+    horsepower: "523 HP",
+    image_url: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800",
+    description: "Sedan sport listrik dengan akselerasi 0-100 km/jam dalam 3.8 detik."
+  },
+  {
+    id: 18,
+    name: "Suzuki Grand Vitara",
+    brand: "Suzuki",
+    category: "Hybrid",
+    price: "Rp 390.000.000",
+    engine: "Smart Hybrid",
+    horsepower: "102 HP",
+    image_url: "https://suzukicdn.com/uploads/news/grand-vitara-untuk-ciptakan-momen-libur-lebaran-yang-stylish.webp",
+    description: "SUV Compact dengan teknologi Mild Hybrid yang efisien untuk harian."
+  },
+  {
+    id: 19,
+    name: "Toyota Alphard HEV",
+    brand: "Toyota",
+    category: "Hybrid",
+    price: "Rp 1.680.000.000",
+    engine: "2.5L Hybrid",
+    horsepower: "250 HP",
+    image_url: "https://astraotoshop.com/asset/article-aop/alphard%202025_20250520.webp",
+    description: "Simbol kemewahan MPV di Indonesia, kini lebih senyap dan irit."
+  },
+  {
+    id: 20,
+    name: "Mini Cooper SE",
+    brand: "Mini",
+    category: "Electric",
+    price: "Rp 1.050.000.000",
+    engine: "Electric Motor",
+    horsepower: "184 HP",
+    image_url: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800",
+    description: "Gokart feeling khas Mini dalam paket elektrik yang ikonik dan stylish."
+  },
+  {
+    id: 21,
+    name: "Neta V-II",
+    brand: "Neta",
+    category: "Electric",
+    price: "Rp 299.000.000",
+    engine: "Electric Motor",
+    horsepower: "94 HP",
+    image_url: "https://arista-group.co.id/wp-content/uploads/2024/06/Neta-V-II-Milk-Tea.png",
+    description: "Crossover listrik entry-level dengan fitur lengkap dan harga terjangkau."
+  },
+  {
+    id: 22,
+    name: "BMW i7 xDrive60",
+    brand: "BMW",
+    category: "Electric",
+    price: "Rp 3.250.000.000",
+    engine: "Dual Electric Motor",
+    horsepower: "544 HP",
+    image_url: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800",
+    description: "Sedan ultra-luxury elektrik dengan layar bioskop theater screen di kabin belakang."
+  },
+  {
+    id: 23,
+    name: "Mazda CX-60",
+    brand: "Mazda",
+    category: "Hybrid",
+    price: "Rp 1.188.000.000",
+    engine: "3.3L Mild Hybrid",
+    horsepower: "280 HP",
+    image_url: "https://www.topgear.com/sites/default/files/2025/03/004-2025-Mazda-CX-60-e-Skyactiv-D-MHEV-Homura-Plus-action_highres.jpg",
+    description: "SUV premium RWD dengan mesin 6 silinder inline yang halus dan bertenaga."
+  },
+  {
+    id: 24,
+    name: "Citroen e-C3",
+    brand: "Citroen",
+    category: "Electric",
+    price: "Rp 377.000.000",
+    engine: "Electric Motor",
+    horsepower: "57 HP",
+    image_url: "https://www.topgear.com/sites/default/files/2025/04/1%20Citroen%20eC3%20review%202025%20UK_1.jpg",
+    description: "City car listrik bergaya Eropa yang mengutamakan kenyamanan suspensi."
+  },
+  {
+    id: 25,
+    name: "Ferrari SF90 Stradale",
+    brand: "Ferrari",
+    category: "Hybrid",
+    price: "Rp 18.000.000.000",
+    engine: "V8 PHEV",
+    horsepower: "986 HP",
+    image_url: "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=800",
+    description: "Hypercar plug-in hybrid Ferrari paling bertenaga yang legal di jalan raya."
+  }
+];

@@ -1,0 +1,76 @@
+// src/components/CarCard.jsx
+import { Zap, Fuel } from 'lucide-react';
+import FavoriteButton from './common/FavoriteButton';
+
+export default function CarCard({ car, onClick }) {
+  
+  // Fungsi Helper: Format Harga Pintar
+  const formatPrice = (priceString) => {
+    if (!priceString) return '';
+
+    // 1. Ambil hanya angkanya (buang "Rp", titik, spasi)
+    const numericPrice = parseInt(priceString.replace(/\D/g, ''));
+    
+    // 2. Format Miliaran (>= 1 Milyar)
+    if (numericPrice >= 1000000000) {
+      // Bagi 1 Milyar, ambil 1 desimal jika perlu
+      const inBillion = (numericPrice / 1000000000).toFixed(1).replace(/\.0$/, '');
+      return `Rp ${inBillion} M`;
+    } 
+    
+    // 3. Format Jutaan (>= 1 Juta)
+    else if (numericPrice >= 1000000) {
+      // Bagi 1 Juta, bulatkan
+      const inMillion = (numericPrice / 1000000).toFixed(0);
+      return `Rp ${inMillion} Jt`;
+    }
+    
+    // Fallback (Jika di bawah 1 juta, tampilkan aslinya)
+    return priceString;
+  };
+
+  return (
+    <div 
+      onClick={() => onClick(car.id)}
+      className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-slate-100"
+    >
+      <div className="relative h-48 overflow-hidden">
+        <img 
+          src={car.image_url} 
+          alt={car.name}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        />
+        <div className="absolute top-3 right-3 z-10">
+          {/* Tombol Favorit */}
+          <FavoriteButton recipeId={car.id} size="sm" /> 
+        </div>
+        <div className="absolute bottom-3 left-3">
+          <span className="px-3 py-1 bg-white/90 backdrop-blur text-slate-800 text-xs font-bold rounded-full shadow-sm">
+            {car.category}
+          </span>
+        </div>
+      </div>
+      
+      <div className="p-4">
+        <h3 className="font-bold text-lg text-slate-800 mb-1 truncate group-hover:text-blue-600 transition-colors">
+          {car.name}
+        </h3>
+        <p className="text-slate-500 text-sm mb-3">{car.brand}</p>
+        
+        <div className="flex items-center justify-between border-t border-slate-100 pt-3">
+          <div className="flex items-center gap-1.5 text-slate-600 text-xs font-medium">
+            {car.category === 'Electric' ? (
+              <Zap className="w-4 h-4 text-yellow-500 fill-current" />
+            ) : (
+              <Fuel className="w-4 h-4 text-blue-500" />
+            )}
+            {car.horsepower}
+          </div>
+          <span className="text-blue-700 font-bold text-sm">
+            {formatPrice(car.price)}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
