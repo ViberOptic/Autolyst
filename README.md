@@ -46,3 +46,23 @@ npm install
 ```bash
 npm run dev
 ```
+
+### Pengujian PWA (Mobile)
+Untuk menguji fitur PWA seperti "Add to Home Screen" dan kemampuan offline:
+
+#### 1. Build Aplikasi:
+
+```bash
+npm run build
+```
+
+#### 2. Jalankan Preview:
+
+```bash
+npm install -g serve
+serve -s dist
+```
+#### 2. Akses dari HP:
+- Pastikan HP dan Laptop terhubung ke Wi-Fi yang sama.
+- Buka browser di HP dan ketik alamat Network IP yang muncul di terminal.
+- Anda akan melihat opsi untuk menginstal aplikasi Autolys.
