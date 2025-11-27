@@ -1,8 +1,16 @@
 // src/pages/AboutPage.jsx
 import logoUrl from '../assets/LOGORN.png';
-import { Zap, Smartphone, Cloud, Code, Heart, ShieldCheck, Github, Instagram } from 'lucide-react';
+import { useAuth } from '../context/AuthContext'; // Import Context
+import { Zap, Smartphone, Cloud, Code, Heart, ShieldCheck, Github, Instagram, LogOut } from 'lucide-react'; // Tambah LogOut icon
 
 export default function AboutPage() {
+  const { signOut } = useAuth(); // Ambil fungsi signOut
+
+  const handleLogout = async () => {
+    await signOut();
+    // Redirection ke halaman login akan ditangani otomatis oleh main.jsx
+  };
+
   const features = [
     {
       icon: <Smartphone className="w-6 h-6 text-blue-500" />,
@@ -35,8 +43,6 @@ export default function AboutPage() {
   ];
 
   return (
-    // PERBAIKAN: Mengurangi padding bottom yang berlebihan (pb-24 -> pb-10)
-    // dan menghapus min-h-screen karena sudah dihandle di layout utama
     <div className="pt-8 px-4 pb-10">
       <div className="max-w-4xl mx-auto space-y-8">
         
@@ -60,9 +66,18 @@ export default function AboutPage() {
             </span>
             v1.0.0 (Stable)
           </div>
-          <p className="text-slate-500 max-w-lg mx-auto leading-relaxed">
+          <p className="text-slate-500 max-w-lg mx-auto leading-relaxed mb-6">
             Platform katalog mobil listrik dan hybrid masa depan. Temukan spesifikasi lengkap, harga, dan simpan mobil impian Anda dalam satu aplikasi modern.
           </p>
+
+          {/* Tombol Logout Baru */}
+          <button 
+            onClick={handleLogout}
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 font-medium rounded-xl transition-all active:scale-95 border border-red-100 shadow-sm"
+          >
+            <LogOut className="w-4 h-4" />
+            LogOut
+          </button>
         </div>
 
         {/* 2. Features Grid */}
