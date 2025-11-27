@@ -39,8 +39,10 @@ Buka terminal di folder proyek, lalu jalankan:
 
 ```bash
 npm install
+```
 
 ### 3. Menjalankan Proyek di Local
 
 ```bash
 npm run dev
+```
