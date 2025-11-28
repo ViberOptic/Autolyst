@@ -35,7 +35,7 @@ export default function AboutPage() {
   ];
 
   const techStack = [
-    { name: "React 18", color: "bg-blue-100 text-blue-700" },
+    { name: "React 19", color: "bg-blue-100 text-blue-700" },
     { name: "Vite", color: "bg-purple-100 text-purple-700" },
     { name: "Tailwind CSS", color: "bg-cyan-100 text-cyan-700" },
     { name: "Supabase", color: "bg-green-100 text-green-700" },
