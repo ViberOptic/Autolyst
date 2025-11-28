@@ -1,18 +1,20 @@
 // src/components/navbar/MobileNavbar.jsx
-import { Home, Zap, Crown, Info, Heart } from 'lucide-react';
+import { Home, Zap, Crown, Info, Heart, Settings } from 'lucide-react';
 
 export default function MobileNavbar({ currentPage, onNavigate }) {
   const navItems = [
     { id: 'home', label: 'Home', icon: Home },
     { id: 'ev', label: 'EV', icon: Zap },
     { id: 'recommendation', label: 'Sultan', icon: Crown },
+    { id: 'manage', label: 'Manage', icon: Settings },
     { id: 'favorite', label: 'Favorit', icon: Heart },
     { id: 'about', label: 'About', icon: Info }
   ];
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 pb-safe pt-2 px-2 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
-      <div className="flex items-center justify-around max-w-md mx-auto pb-2">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 pb-safe pt-2 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+      {/* Container menggunakan Grid 6 Kolom agar pas 1 baris (tidak di-scroll) */}
+      <div className="grid grid-cols-6 gap-1 px-1 pb-2 w-full">
         {navItems.map((item) => {
           const IconComponent = item.icon;
           const isActive = currentPage === item.id;
@@ -21,18 +23,19 @@ export default function MobileNavbar({ currentPage, onNavigate }) {
             <button
               key={item.id}
               onClick={() => onNavigate(item.id)}
-              className={`flex flex-col items-center py-2 px-3 rounded-xl transition-all duration-200 ${
+              className={`flex flex-col items-center justify-center py-2 rounded-lg transition-all duration-200 ${
                 isActive 
                   ? 'text-blue-600 bg-blue-50' 
                   : 'text-slate-400 hover:text-slate-600'
               }`}
             >
               <IconComponent 
-                size={20} 
+                size={20} // Ukuran ikon disesuaikan (20px) agar proporsional
                 className={`mb-1 transition-transform duration-200 ${isActive ? 'scale-110 fill-current' : ''}`}
                 strokeWidth={isActive ? 2.5 : 2}
               />
-              <span className="text-[10px] font-semibold tracking-wide">
+              {/* Ukuran font text-[9px] agar muat 6 menu berjejer */}
+              <span className="text-[9px] font-semibold tracking-wide w-full text-center truncate px-0.5">
                 {item.label}
               </span>
             </button>
