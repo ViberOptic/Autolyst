@@ -1,40 +1,61 @@
 // src/pages/FavoritePage.jsx
 import { useState, useEffect } from 'react';
-import { carData } from '../data/cars';
+import { supabase } from '../config/supabase'; // Import supabase
 import favoriteService from '../services/favoriteService';
-// Hapus import getUserIdentifier
 import CarCard from '../components/CarCard';
 import ModernPagination from '../components/common/ModernPagination';
-import { Heart, ArrowRight, Car } from 'lucide-react';
+import { Heart, ArrowRight, Car, Loader2 } from 'lucide-react';
 
 export default function FavoritePage({ onCarClick, onNavigate }) {
   const [favorites, setFavorites] = useState([]); 
   const [loading, setLoading] = useState(true);
-  const [allFavorites, setAllFavorites] = useState([]); 
   const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
   const ITEMS_PER_PAGE = 5;
 
   useEffect(() => {
-    const fetchFavorites = async () => {
+    const fetchFavoriteCars = async () => {
       setLoading(true);
-      // Tidak perlu userId lagi
-      const { success, data } = await favoriteService.getFavorites();
-      if (success && Array.isArray(data)) {
-        const favCars = carData.filter(car => data.includes(car.id));
-        setAllFavorites(favCars);
+      try {
+        // 1. Ambil daftar ID mobil yang difavoritkan user dari service
+        const { success, data: favoriteIds } = await favoriteService.getFavorites();
+        
+        // Jika tidak ada data atau error, set kosong
+        if (!success || !favoriteIds || favoriteIds.length === 0) {
+          setFavorites([]);
+          setTotalCount(0);
+          setLoading(false);
+          return;
+        }
+
+        // 2. Ambil detail mobil dari tabel 'cars' di Supabase berdasarkan ID tersebut
+        // Menggunakan filter .in() untuk mencocokkan ID dan pagination range()
+        const from = (page - 1) * ITEMS_PER_PAGE;
+        const to = from + ITEMS_PER_PAGE - 1;
+
+        const { data: cars, error, count } = await supabase
+          .from('cars')
+          .select('*', { count: 'exact' })
+          .in('id', favoriteIds)
+          .range(from, to);
+
+        if (error) throw error;
+
+        setFavorites(cars || []);
+        setTotalCount(count || 0);
+
+      } catch (err) {
+        console.error("Error fetching favorite cars:", err.message);
+        // Bisa tambahkan state error UI jika diperlukan
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
-    fetchFavorites();
-  }, []);
 
-  useEffect(() => {
-    const startIndex = (page - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    setFavorites(allFavorites.slice(startIndex, endIndex));
-  }, [page, allFavorites]);
+    fetchFavoriteCars();
+  }, [page]); // Re-fetch saat halaman berubah
 
-  const totalPages = Math.ceil(allFavorites.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
 
   const handlePageChange = (newPage) => {
     setPage(newPage);
@@ -45,6 +66,7 @@ export default function FavoritePage({ onCarClick, onNavigate }) {
     <div className="pt-8 px-4 pb-10">
       <div className="max-w-[1600px] mx-auto">
         
+        {/* Header Section */}
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 mb-8 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="p-3 bg-red-50 rounded-full text-red-500 border border-red-100">
@@ -53,18 +75,24 @@ export default function FavoritePage({ onCarClick, onNavigate }) {
             <div>
               <h1 className="text-2xl md:text-3xl font-bold text-slate-900">Koleksi Favorit</h1>
               <p className="text-slate-500 text-sm mt-1">
-                {allFavorites.length} mobil impian tersimpan
+                {totalCount} mobil impian tersimpan
               </p>
             </div>
           </div>
-          <button onClick={() => onNavigate('ev')} className="hidden md:flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-4 py-2 rounded-lg transition-colors">
+          <button 
+            onClick={() => onNavigate('ev')} 
+            className="hidden md:flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-4 py-2 rounded-lg transition-colors"
+          >
             Tambah Lagi <ArrowRight className="w-4 h-4" />
           </button>
         </div>
 
+        {/* Content Section */}
         {loading ? (
           <div className="text-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto mb-4"></div>
+            <div className="flex justify-center mb-4">
+               <Loader2 className="w-12 h-12 animate-spin text-red-600" />
+            </div>
             <p className="text-slate-500">Memuat koleksi Anda...</p>
           </div>
         ) : favorites.length > 0 ? (
@@ -74,8 +102,13 @@ export default function FavoritePage({ onCarClick, onNavigate }) {
                 <CarCard key={car.id} car={car} onClick={onCarClick} />
               ))}
             </div>
+            
             <div className="py-8">
-                <ModernPagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
+                <ModernPagination 
+                  currentPage={page} 
+                  totalPages={totalPages} 
+                  onPageChange={handlePageChange} 
+                />
             </div>
           </>
         ) : (
@@ -87,7 +120,10 @@ export default function FavoritePage({ onCarClick, onNavigate }) {
             <p className="text-slate-500 text-sm mb-6 max-w-xs mx-auto">
               Koleksi Anda masih kosong. Jelajahi katalog dan simpan mobil impian Anda.
             </p>
-            <button onClick={() => onNavigate('ev')} className="px-6 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all font-medium flex items-center gap-2 text-sm">
+            <button 
+              onClick={() => onNavigate('ev')} 
+              className="px-6 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all font-medium flex items-center gap-2 text-sm"
+            >
               <Car className="w-4 h-4" /> Jelajahi Katalog
             </button>
           </div>
