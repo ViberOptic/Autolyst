@@ -1,14 +1,13 @@
 // src/pages/AboutPage.jsx
 import logoUrl from '../assets/LOGORN.png';
-import { useAuth } from '../context/AuthContext'; // Import Context
-import { Zap, Smartphone, Cloud, Code, Heart, ShieldCheck, Github, Instagram, LogOut } from 'lucide-react'; // Tambah LogOut icon
+import { useAuth } from '../context/AuthContext';
+import { Zap, Smartphone, Cloud, Code, Heart, ShieldCheck, Github, Instagram, LogOut, Settings } from 'lucide-react';
 
-export default function AboutPage() {
-  const { signOut } = useAuth(); // Ambil fungsi signOut
+export default function AboutPage({ onNavigate }) {
+  const { signOut } = useAuth();
 
   const handleLogout = async () => {
     await signOut();
-    // Redirection ke halaman login akan ditangani otomatis oleh main.jsx
   };
 
   const features = [
@@ -70,14 +69,26 @@ export default function AboutPage() {
             Platform katalog mobil listrik dan hybrid masa depan. Temukan spesifikasi lengkap, harga, dan simpan mobil impian Anda dalam satu aplikasi modern.
           </p>
 
-          {/* Tombol Logout Baru */}
-          <button 
-            onClick={handleLogout}
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 font-medium rounded-xl transition-all active:scale-95 border border-red-100 shadow-sm"
-          >
-            <LogOut className="w-4 h-4" />
-            LogOut
-          </button>
+          {/* Action Buttons */}
+          <div className="flex justify-center gap-3 flex-wrap">
+            {/* Tombol Kelola Katalog */}
+            <button 
+              onClick={() => onNavigate('manage')}
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-900 text-white hover:bg-slate-800 font-medium rounded-xl transition-all active:scale-95 shadow-lg shadow-slate-200"
+            >
+              <Settings className="w-4 h-4" />
+              Kelola Katalog
+            </button>
+
+            {/* Tombol Logout */}
+            <button 
+              onClick={handleLogout}
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 font-medium rounded-xl transition-all active:scale-95 border border-red-100 shadow-sm"
+            >
+              <LogOut className="w-4 h-4" />
+              LogOut
+            </button>
+          </div>
         </div>
 
         {/* 2. Features Grid */}

@@ -11,7 +11,7 @@ import FavoritePage from './pages/FavoritePage';
 import CarDetailPage from './pages/CarDetailPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import ManageCarsPage from './pages/ManageCarsPage'; // <-- Import Halaman Baru
+import ManageCarsPage from './pages/ManageCarsPage'; 
 import DesktopNavbar from './components/navbar/DesktopNavbar';
 import MobileNavbar from './components/navbar/MobileNavbar';
 import './index.css'
@@ -70,8 +70,8 @@ function AppContent() {
       case 'ev': return <EVPage onCarClick={handleCarClick} />;
       case 'recommendation': return <RecommendationPage onCarClick={handleCarClick} />;
       case 'favorite': return <FavoritePage onCarClick={handleCarClick} onNavigate={setPage} />;
-      case 'manage': return <ManageCarsPage />; // <-- Rute Baru
-      case 'about': return <AboutPage />;
+      case 'manage': return <ManageCarsPage />;
+      case 'about': return <AboutPage onNavigate={setPage} />;
       case 'login': return <LoginPage onNavigate={setPage} />;
       case 'register': return <RegisterPage onNavigate={setPage} />;
       default: return <LoginPage onNavigate={setPage} />;
