@@ -1,5 +1,5 @@
 // src/pages/CarDetailPage.jsx
-import { ArrowLeft, Calendar, Gauge, Fuel, Banknote, Zap } from 'lucide-react';
+import { ArrowLeft, Calendar, Gauge, Fuel, Zap } from 'lucide-react';
 import { useCarDetail } from '../hooks/useCars';
 import FavoriteButton from '../components/common/FavoriteButton';
 
@@ -30,10 +30,12 @@ export default function CarDetailPage({ id, onBack }) {
     );
   }
 
+  // Regex parsing untuk harga agar styling angka berbeda
   const priceParts = car.price ? car.price.match(/^(\D*)(\d[\d\.,]*)(\D*)$/) : null;
 
   return (
     <div className="min-h-screen bg-white pb-10">
+      {/* Header Image Section */}
       <div className="relative h-72 md:h-96 bg-slate-200">
         <img 
           src={car.image_url} 
@@ -60,7 +62,6 @@ export default function CarDetailPage({ id, onBack }) {
             <span className="px-3 py-1 bg-blue-600 text-xs font-bold rounded-full uppercase tracking-wider mb-2 inline-block">
               {car.category}
             </span>
-            {/* UPDATE: Nama Mobil Detail diberi class 'notranslate' */}
             <h1 className="text-3xl md:text-4xl font-bold mb-1 notranslate">{car.name}</h1>
             <p className="text-slate-200 text-lg">{car.brand}</p>
           </div>
@@ -68,18 +69,19 @@ export default function CarDetailPage({ id, onBack }) {
       </div>
 
       <main className="max-w-7xl mx-auto px-4 py-8 -mt-6 relative z-10">
+        {/* Price Card */}
         <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div>
+          <div className="text-center md:text-left w-full md:w-auto">
             <p className="text-slate-500 text-sm mb-1">Harga OTR (Estimasi)</p>
-            <div className="flex items-baseline gap-1.5">
+            <div className="flex items-baseline justify-center md:justify-start gap-1.5 flex-wrap">
               {priceParts ? (
                 <>
-                  <span className="text-3xl font-bold text-blue-700 notranslate">{priceParts[1]}</span>
-                  <span className="text-3xl font-bold text-blue-700 notranslate">{priceParts[2]}</span>
-                  {priceParts[3] && <span className="text-3xl font-bold text-blue-700">{priceParts[3]}</span>}
+                  <span className="text-2xl sm:text-3xl font-bold text-blue-700 notranslate">{priceParts[1]}</span>
+                  <span className="text-2xl sm:text-3xl font-bold text-blue-700 notranslate">{priceParts[2]}</span>
+                  {priceParts[3] && <span className="text-2xl sm:text-3xl font-bold text-blue-700">{priceParts[3]}</span>}
                 </>
               ) : (
-                <span className="text-3xl font-bold text-blue-700 notranslate">{car.price}</span>
+                <span className="text-2xl sm:text-3xl font-bold text-blue-700 notranslate">{car.price}</span>
               )}
             </div>
           </div>
@@ -90,16 +92,18 @@ export default function CarDetailPage({ id, onBack }) {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
+            {/* Description */}
             <section>
               <h3 className="text-xl font-bold text-slate-900 mb-4">Tentang Kendaraan</h3>
-              <p className="text-slate-600 leading-relaxed text-lg">
+              <p className="text-slate-600 leading-relaxed text-lg text-justify sm:text-left">
                 {car.description}
               </p>
             </section>
 
+            {/* Main Specs */}
             <section>
               <h3 className="text-xl font-bold text-slate-900 mb-4">Spesifikasi Utama</h3>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
                 <SpecItem 
                   icon={<Fuel className="w-5 h-5 text-blue-500" />}
                   label="Tipe Mesin"
@@ -126,34 +130,14 @@ export default function CarDetailPage({ id, onBack }) {
             </section>
           </div>
 
+          {/* Highlights Sidebar */}
           <div className="space-y-6">
             <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
               <h3 className="font-bold text-slate-900 mb-4">Highlights</h3>
               <ul className="space-y-3">
-                <li className="flex items-center gap-2 text-slate-600">
-                  <span className="w-2 h-2 bg-blue-500 rounded-full shrink-0" />
-                  <div className="flex items-center gap-1.5 flex-wrap">
-                    <span>Garansi Resmi</span>
-                    <span className="notranslate font-bold text-slate-800">5</span>
-                    <span>Tahun</span>
-                  </div>
-                </li>
-                <li className="flex items-center gap-2 text-slate-600">
-                  <span className="w-2 h-2 bg-blue-500 rounded-full shrink-0" />
-                  <div className="flex items-center gap-1.5 flex-wrap">
-                    <span>Gratis Service</span>
-                    <span className="notranslate font-bold text-slate-800">50.000</span>
-                    <span>KM</span>
-                  </div>
-                </li>
-                <li className="flex items-center gap-2 text-slate-600">
-                  <span className="w-2 h-2 bg-blue-500 rounded-full shrink-0" />
-                  <div className="flex items-center gap-1.5 flex-wrap">
-                    <span>Asuransi All Risk</span>
-                    <span className="notranslate font-bold text-slate-800">1</span>
-                    <span>Tahun</span>
-                  </div>
-                </li>
+                <HighlightItem label="Garansi Resmi" value="5" unit="Tahun" />
+                <HighlightItem label="Gratis Service" value="50.000" unit="KM" />
+                <HighlightItem label="Asuransi All Risk" value="1" unit="Tahun" />
               </ul>
             </div>
           </div>
@@ -163,29 +147,71 @@ export default function CarDetailPage({ id, onBack }) {
   );
 }
 
+// --- SUB COMPONENTS ---
+
 function SpecItem({ icon, label, value, isMetric }) {
+  // Parsing: Memisahkan (Prefix) + (Angka) + (Suffix)
   const parts = value ? value.toString().match(/^(\D*)(\d+(?:[\.,]\d+)?)(\D*)$/) : null;
 
+  // Helper: Memisahkan "Unit" (kata pertama) dari "Sisa Teks"
+  // Contoh: "L Hybrid System" -> unit: "L", rest: "Hybrid System"
+  const getSuffixParts = (suffix) => {
+    if (!suffix) return { unit: '', rest: '' };
+    const trimmed = suffix.trim();
+    const firstSpaceIdx = trimmed.indexOf(' ');
+    
+    if (firstSpaceIdx === -1) return { unit: trimmed, rest: '' };
+    
+    return {
+      unit: trimmed.slice(0, firstSpaceIdx),
+      rest: trimmed.slice(firstSpaceIdx + 1)
+    };
+  };
+
   return (
-    <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
-      <div className="p-2 bg-white rounded-lg shadow-sm">
+    <div className="flex items-start gap-3 p-3 sm:p-4 bg-slate-50 rounded-xl border border-slate-100 h-full">
+      <div className="p-2 bg-white rounded-lg shadow-sm shrink-0">
         {icon}
       </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-xs text-slate-500 mb-0.5">{label}</p>
+      <div className="min-w-0 flex-1">
+        <p className="text-xs text-slate-500 mb-1">{label}</p>
         
-        {parts ? (
-          <div className="flex items-baseline gap-1 font-semibold text-slate-900">
-            {parts[1] && <span>{parts[1]}</span>}
-            <span className="notranslate">{parts[2]}</span>
-            {parts[3] && <span className={isMetric ? 'notranslate' : ''}>{parts[3].trim()}</span>}
-          </div>
-        ) : (
-          <p className={`font-semibold text-slate-900 truncate ${isMetric ? 'notranslate' : ''}`}>
+        {parts ? (() => {
+          const { unit, rest } = getSuffixParts(parts[3]);
+          return (
+            <p className="font-semibold text-slate-900 text-sm sm:text-base leading-snug">
+              {/* Prefix (misal: "V") */}
+              {parts[1] && <span>{parts[1].trim()} </span>}
+              
+              {/* Angka (Tidak diterjemahkan) */}
+              <span className="notranslate">{parts[2]}</span>
+              
+              {/* Unit (misal: "L", "HP") - Diberi Jarak Spasi Eksplisit */}
+              {unit && <span className={isMetric ? 'notranslate' : ''}> {unit}</span>}
+              
+              {/* Sisa Teks (misal: "Hybrid System") - Diberi Jarak Spasi Eksplisit */}
+              {rest && <span> {rest}</span>}
+            </p>
+          );
+        })() : (
+          <p className={`font-semibold text-slate-900 text-sm sm:text-base break-words leading-snug ${isMetric ? 'notranslate' : ''}`}>
             {value}
           </p>
         )}
       </div>
     </div>
+  );
+}
+
+function HighlightItem({ label, value, unit }) {
+  return (
+    <li className="flex items-start gap-2 text-slate-600">
+      <span className="w-2 h-2 bg-blue-500 rounded-full shrink-0 mt-2" />
+      <div className="flex flex-wrap items-center gap-1 text-sm">
+        <span>{label}</span>
+        <span className="notranslate font-bold text-slate-800">{value}</span>
+        <span>{unit}</span>
+      </div>
+    </li>
   );
 }
