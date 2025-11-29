@@ -56,7 +56,7 @@ export default function CarFormModal({ isOpen, onClose, onSubmit, initialData })
     setLoading(false);
   };
 
-  // Helper Render Preview Harga Pintar
+  // Helper Render Preview Harga Pintar (KONSISTEN)
   const renderPreviewPrice = (priceStr) => {
     if (!priceStr) return <span className="text-xs text-blue-600 font-medium">-</span>;
     
@@ -65,8 +65,11 @@ export default function CarFormModal({ isOpen, onClose, onSubmit, initialData })
 
     return (
       <div className="flex items-baseline gap-1 text-xs text-blue-600 font-bold">
-        {parts[1] && <span>{parts[1]}</span>}
+        {/* Prefix (Rp) - No Translate */}
+        {parts[1] && <span className="notranslate">{parts[1]}</span>}
+        {/* Angka - No Translate */}
         <span className="notranslate">{parts[2]}</span>
+        {/* Suffix (M/Jt) - Translate Allowed */}
         {parts[3] && <span>{parts[3].trim()}</span>}
       </div>
     );

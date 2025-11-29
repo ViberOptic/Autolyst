@@ -71,16 +71,20 @@ export default function ManageCarsPage() {
     }
   };
 
-  // Helper render harga pintar untuk list
+  // Helper render harga pintar (KONSISTEN)
   const renderPrice = (priceStr) => {
     if (!priceStr) return null;
     const parts = priceStr.match(/^(\D*)(\d[\d\.,]*)(\D*)$/);
+    
     if (!parts) return <span className="text-blue-700 font-bold text-sm notranslate">{priceStr}</span>;
     
     return (
       <div className="flex items-baseline gap-1 text-blue-700 font-bold text-sm">
-        {parts[1] && <span>{parts[1]}</span>}
+        {/* Rp - Notranslate */}
+        {parts[1] && <span className="notranslate">{parts[1]}</span>}
+        {/* Angka - Notranslate */}
         <span className="notranslate">{parts[2]}</span>
+        {/* Suffix - Translate Allowed */}
         {parts[3] && <span>{parts[3].trim()}</span>}
       </div>
     );

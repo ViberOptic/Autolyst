@@ -30,8 +30,7 @@ export default function CarDetailPage({ id, onBack }) {
     );
   }
 
-  // Helper untuk memecah harga utama (misal: "Rp 850.000.000")
-  // Kita pisahkan "Rp" dan Angkanya agar aman
+  // Regex: Group 1 (Rp/Prefix), Group 2 (Angka), Group 3 (Suffix/Unit)
   const priceParts = car.price ? car.price.match(/^(\D*)(\d[\d\.,]*)(\D*)$/) : null;
 
   return (
@@ -72,11 +71,11 @@ export default function CarDetailPage({ id, onBack }) {
         <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div>
             <p className="text-slate-500 text-sm mb-1">Harga OTR (Estimasi)</p>
-            {/* HARGA UTAMA: Dipisah agar simbol mata uang aman, angka aman, spasi konsisten */}
+            {/* HARGA UTAMA: Rp & Angka (Notranslate), Suffix (Translate) */}
             <div className="flex items-baseline gap-1.5">
               {priceParts ? (
                 <>
-                  <span className="text-3xl font-bold text-blue-700">{priceParts[1]}</span>
+                  <span className="text-3xl font-bold text-blue-700 notranslate">{priceParts[1]}</span>
                   <span className="text-3xl font-bold text-blue-700 notranslate">{priceParts[2]}</span>
                   {priceParts[3] && <span className="text-3xl font-bold text-blue-700">{priceParts[3]}</span>}
                 </>
@@ -129,7 +128,6 @@ export default function CarDetailPage({ id, onBack }) {
           <div className="space-y-6">
             <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
               <h3 className="font-bold text-slate-900 mb-4">Highlights</h3>
-              {/* HIGHLIGHTS: Menggunakan struktur Flexbox + Gap untuk spasi konsisten */}
               <ul className="space-y-3">
                 <li className="flex items-center gap-2 text-slate-600">
                   <span className="w-2 h-2 bg-blue-500 rounded-full shrink-0" />
@@ -164,12 +162,7 @@ export default function CarDetailPage({ id, onBack }) {
   );
 }
 
-// COMPONENT BARU: SpecItem Pintar
-// Memisahkan angka dan teks secara otomatis agar teks bisa ditranslate, angka tidak, dan spasi aman.
 function SpecItem({ icon, label, value }) {
-  // Regex: Tangkap (Prefix Non-Angka) (Angka+Simbol) (Suffix Non-Angka)
-  // Contoh: "217 HP" -> Match: "", "217", " HP"
-  // Contoh: "2.0L Hybrid" -> Match: "", "2.0", "L Hybrid"
   const parts = value ? value.toString().match(/^(\D*)(\d+(?:[\.,]\d+)?)(\D*)$/) : null;
 
   return (
@@ -181,14 +174,12 @@ function SpecItem({ icon, label, value }) {
         <p className="text-xs text-slate-500 mb-0.5">{label}</p>
         
         {parts ? (
-          // Jika ada angka: Pisahkan container
           <div className="flex items-baseline gap-1 font-semibold text-slate-900">
             {parts[1] && <span>{parts[1]}</span>}
             <span className="notranslate">{parts[2]}</span>
             {parts[3] && <span>{parts[3].trim()}</span>}
           </div>
         ) : (
-          // Jika murni teks (misal: "Automatic", "Electric Motor"): Render biasa agar ditranslate full
           <p className="font-semibold text-slate-900 truncate">
             {value}
           </p>

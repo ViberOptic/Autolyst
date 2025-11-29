@@ -4,25 +4,26 @@ import FavoriteButton from './common/FavoriteButton';
 
 export default function CarCard({ car, onClick }) {
   
-  // Fungsi Helper: Format Harga Pintar dengan Spasi Konsisten
-  const formatPrice = (priceString) => {
-    if (!priceString) return '';
+  // Helper: Pisahkan Angka dan Satuan agar "Rp" & Angka tidak ditranslate, tapi "Jt/M" bisa ditranslate
+  const getPriceParts = (priceString) => {
+    if (!priceString) return { value: '', unit: '' };
 
     const numericPrice = parseInt(priceString.replace(/\D/g, ''));
     
-    // Gunakan template literal standar untuk memastikan spasi terbaca
     if (numericPrice >= 1000000000) {
       const inBillion = (numericPrice / 1000000000).toFixed(1).replace(/\.0$/, '');
-      return `Rp ${inBillion} M`;
+      return { value: inBillion, unit: 'M' };
     } 
     
     if (numericPrice >= 1000000) {
       const inMillion = (numericPrice / 1000000).toFixed(0);
-      return `Rp ${inMillion} Jt`;
+      return { value: inMillion, unit: 'Jt' };
     }
     
-    return priceString;
+    return { value: priceString, unit: '' };
   };
+
+  const { value, unit } = getPriceParts(car.price);
 
   return (
     <div 
@@ -36,7 +37,7 @@ export default function CarCard({ car, onClick }) {
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
         <div className="absolute top-3 right-3 z-10">
-          <FavoriteButton recipeId={car.id} size="sm" /> 
+          <FavoriteButtonWV recipeId={car.id} size="sm" /> 
         </div>
         <div className="absolute bottom-3 left-3">
           <span className="px-3 py-1 bg-white/90 backdrop-blur text-slate-800 text-xs font-bold rounded-full shadow-sm">
@@ -52,23 +53,28 @@ export default function CarCard({ car, onClick }) {
         <p className="text-slate-500 text-sm mb-3">{car.brand}</p>
         
         <div className="flex items-center justify-between border-t border-slate-100 pt-3">
-          {/* UPDATE: Menggunakan gap-1.5 untuk jarak ikon dan teks yang konsisten */}
           <div className="flex items-center gap-1.5 text-slate-600 text-xs font-medium">
             {car.category === 'Electric' ? (
               <Zap className="w-4 h-4 text-yellow-500 fill-current" />
             ) : (
               <Fuel className="w-4 h-4 text-blue-500" />
             )}
-            {/* Bungkus angka spesifikasi agar tidak terjemahkan & jaga jarak */}
             <span className="notranslate">{car.horsepower}</span>
           </div>
           
-          {/* UPDATE: Harga dengan whitespace-nowrap agar unit tidak turun baris */}
-          <span className="text-blue-700 font-bold text-sm whitespace-nowrap notranslate">
-            {formatPrice(car.price)}
-          </span>
+          {/* HARGA KONSISTEN: Rp & Angka (No Translate), Unit (Translate) */}
+          <div className="flex items-baseline gap-1 text-blue-700 font-bold text-sm whitespace-nowrap">
+            <span className="notranslate">Rp</span>
+            <span className="notranslate">{value}</span>
+            <span>{unit}</span>
+          </div>
         </div>
       </div>
     </div>
   );
+}
+
+// Wrapper sementara agar tidak error saat copy-paste jika nama props berbeda di file asli
+function FavoriteButtonWV({ recipeId, size }) {
+    return <FavoriteButton recipeId={recipeId} size={size} />
 }
