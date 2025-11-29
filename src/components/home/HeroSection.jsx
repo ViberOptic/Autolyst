@@ -22,7 +22,7 @@ export default function HeroSection({ onNavigate }) {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
               {/* PERBAIKAN: Angka 1 dibungkus span notranslate */}
-              Platform Mobil Listrik No. <span className="notranslate">1</span>
+              Platform Mobil Listrik Nomor <span className="notranslate">1</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-4 lg:mb-6 tracking-tight">
