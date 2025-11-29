@@ -72,7 +72,8 @@ export default function CarDetailPage({ id, onBack }) {
         {/* Price Card */}
         <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-center md:text-left w-full md:w-auto">
-            <p className="text-slate-500 text-sm mb-1">Harga OTR (Estimasi)</p>
+            {/* PERBAIKAN: Menggunakan "On The Road" agar Google Translate memahaminya sebagai kalimat utuh */}
+            <p className="text-slate-500 text-sm mb-1">Harga On The Road (Estimasi)</p>
             <div className="flex items-baseline justify-center md:justify-start gap-1.5 flex-wrap">
               {priceParts ? (
                 <>
@@ -154,7 +155,6 @@ function SpecItem({ icon, label, value, isMetric }) {
   const parts = value ? value.toString().match(/^(\D*)(\d+(?:[\.,]\d+)?)(\D*)$/) : null;
 
   // Helper: Memisahkan "Unit" (kata pertama) dari "Sisa Teks"
-  // Contoh: "L Hybrid System" -> unit: "L", rest: "Hybrid System"
   const getSuffixParts = (suffix) => {
     if (!suffix) return { unit: '', rest: '' };
     const trimmed = suffix.trim();
@@ -180,7 +180,7 @@ function SpecItem({ icon, label, value, isMetric }) {
           const { unit, rest } = getSuffixParts(parts[3]);
           return (
             <p className="font-semibold text-slate-900 text-sm sm:text-base leading-snug">
-              {/* Prefix (misal: "V") */}
+              {/* Prefix */}
               {parts[1] && <span>{parts[1].trim()} </span>}
               
               {/* Angka (Tidak diterjemahkan) */}
@@ -189,7 +189,7 @@ function SpecItem({ icon, label, value, isMetric }) {
               {/* Unit (misal: "L", "HP") - Diberi Jarak Spasi Eksplisit */}
               {unit && <span className={isMetric ? 'notranslate' : ''}> {unit}</span>}
               
-              {/* Sisa Teks (misal: "Hybrid System") - Diberi Jarak Spasi Eksplisit */}
+              {/* Sisa Teks (misal: "Hybrid System") */}
               {rest && <span> {rest}</span>}
             </p>
           );
