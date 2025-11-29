@@ -21,7 +21,8 @@ export default function HeroSection({ onNavigate }) {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
-              Platform Mobil Listrik No. 1
+              {/* PERBAIKAN: Angka 1 dibungkus span notranslate */}
+              Platform Mobil Listrik No. <span className="notranslate">1</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-4 lg:mb-6 tracking-tight">
@@ -57,7 +58,8 @@ export default function HeroSection({ onNavigate }) {
             <div className="mt-8 flex items-center justify-center lg:justify-start gap-6 text-slate-500 text-sm font-medium">
               <div className="flex items-center gap-1.5">
                 <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                100% Electric & Hybrid
+                {/* PERBAIKAN: 100% dibungkus span notranslate */}
+                <span className="notranslate">100%</span> Electric & Hybrid
               </div>
               <div className="flex items-center gap-1.5">
                 <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
@@ -81,7 +83,6 @@ export default function HeroSection({ onNavigate }) {
                         alt={cars[0].name} 
                         className="rounded-lg sm:rounded-xl w-full h-28 sm:h-40 object-cover"
                       />
-                      {/* UPDATE: Nama Mobil Hero diberi class 'notranslate' */}
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold text-center p-2 notranslate">
                         {cars[0].name}
                       </div>
