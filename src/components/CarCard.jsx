@@ -41,7 +41,7 @@ export default function CarCard({ car, onClick }) {
       onClick={() => onClick(car.id)}
       className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer border border-slate-100"
     >
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative w-full aspect-video overflow-hidden">
         <img 
           src={car.image_url} 
           alt={car.name}
@@ -58,7 +58,6 @@ export default function CarCard({ car, onClick }) {
       </div>
       
       <div className="p-4">
-        {/* UPDATE: Nama Mobil diberi class 'notranslate' */}
         <h3 className="font-bold text-lg text-slate-800 mb-1 truncate group-hover:text-blue-600 transition-colors notranslate">
           {car.name}
         </h3>
