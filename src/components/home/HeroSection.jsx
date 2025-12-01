@@ -21,7 +21,6 @@ export default function HeroSection({ onNavigate }) {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
-              {/* PERBAIKAN: Angka 1 dibungkus span notranslate */}
               Platform Mobil Listrik Nomor <span className="notranslate">1</span>
             </div>
 
@@ -58,7 +57,6 @@ export default function HeroSection({ onNavigate }) {
             <div className="mt-8 flex items-center justify-center lg:justify-start gap-6 text-slate-500 text-sm font-medium">
               <div className="flex items-center gap-1.5">
                 <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                {/* PERBAIKAN: 100% dibungkus span notranslate */}
                 <span className="notranslate">100%</span> Electric & Hybrid
               </div>
               <div className="flex items-center gap-1.5">
@@ -81,7 +79,7 @@ export default function HeroSection({ onNavigate }) {
                       <img 
                         src={cars[0].image_url} 
                         alt={cars[0].name} 
-                        className="rounded-lg sm:rounded-xl w-full h-28 sm:h-40 object-cover"
+                        className="rounded-lg sm:rounded-xl w-full aspect-video object-cover"
                       />
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold text-center p-2 notranslate">
                         {cars[0].name}
@@ -93,7 +91,7 @@ export default function HeroSection({ onNavigate }) {
                       <img 
                         src={cars[1].image_url} 
                         alt={cars[1].name} 
-                        className="rounded-lg sm:rounded-xl w-full h-24 sm:h-32 object-cover"
+                        className="rounded-lg sm:rounded-xl w-full aspect-video object-cover"
                       />
                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold text-center p-2 notranslate">
                         {cars[1].name}
@@ -108,7 +106,7 @@ export default function HeroSection({ onNavigate }) {
                       <img 
                         src={cars[2].image_url} 
                         alt={cars[2].name} 
-                        className="rounded-lg sm:rounded-xl w-full h-24 sm:h-32 object-cover"
+                        className="rounded-lg sm:rounded-xl w-full aspect-video object-cover"
                       />
                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold text-center p-2 notranslate">
                         {cars[2].name}
@@ -120,7 +118,7 @@ export default function HeroSection({ onNavigate }) {
                       <img 
                         src={cars[3].image_url} 
                         alt={cars[3].name} 
-                        className="rounded-lg sm:rounded-xl w-full h-28 sm:h-40 object-cover"
+                        className="rounded-lg sm:rounded-xl w-full aspect-video object-cover"
                       />
                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold text-center p-2 notranslate">
                         {cars[3].name}

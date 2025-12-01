@@ -204,8 +204,14 @@ Akses aplikasi di http://localhost:5173.
 Untuk menguji fitur PWA dan instalasi ke Home Screen:
 
 ```bash
+# Jalankan perintah build
 npm run build
-npx serve -s dist
+
+# Instal serve secara global (jika belum)
+npm install -g serve
+
+# Jalankan folder hasil build
+serve -s build
 ```
 
 #### 6. Akses dari HP:
