@@ -30,12 +30,10 @@ export default function CarDetailPage({ id, onBack }) {
     );
   }
 
-  // Regex parsing untuk harga agar styling angka berbeda
   const priceParts = car.price ? car.price.match(/^(\D*)(\d[\d\.,]*)(\D*)$/) : null;
 
   return (
     <div className="min-h-screen bg-white pb-10">
-      {/* Header Image Section */}
       <div className="relative h-72 md:h-96 bg-slate-200">
         <img 
           src={car.image_url} 
@@ -69,10 +67,8 @@ export default function CarDetailPage({ id, onBack }) {
       </div>
 
       <main className="max-w-7xl mx-auto px-4 py-8 -mt-6 relative z-10">
-        {/* Price Card */}
         <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-center md:text-left w-full md:w-auto">
-            {/* PERBAIKAN: Menggunakan "On The Road" agar Google Translate memahaminya sebagai kalimat utuh */}
             <p className="text-slate-500 text-sm mb-1">Harga On The Road (Estimasi)</p>
             <div className="flex items-baseline justify-center md:justify-start gap-1.5 flex-wrap">
               {priceParts ? (
@@ -86,14 +82,18 @@ export default function CarDetailPage({ id, onBack }) {
               )}
             </div>
           </div>
-          <button className="w-full md:w-auto px-8 py-3 bg-slate-900 text-white font-medium rounded-xl hover:bg-slate-800 transition-colors">
+          
+          <button 
+            onClick={() => window.open('https://www.instagram.com/reel/DO_Z7kQDlI_/?igsh=MTE3aXdpOGtiODZxZw==', '_blank')}
+            className="w-full md:w-auto px-8 py-3 bg-slate-900 text-white font-medium rounded-xl hover:bg-slate-800 transition-colors"
+          >
             Hubungi Dealer
           </button>
+
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
-            {/* Description */}
             <section>
               <h3 className="text-xl font-bold text-slate-900 mb-4">Tentang Kendaraan</h3>
               <p className="text-slate-600 leading-relaxed text-lg text-justify sm:text-left">
@@ -101,7 +101,6 @@ export default function CarDetailPage({ id, onBack }) {
               </p>
             </section>
 
-            {/* Main Specs */}
             <section>
               <h3 className="text-xl font-bold text-slate-900 mb-4">Spesifikasi Utama</h3>
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
@@ -131,7 +130,6 @@ export default function CarDetailPage({ id, onBack }) {
             </section>
           </div>
 
-          {/* Highlights Sidebar */}
           <div className="space-y-6">
             <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
               <h3 className="font-bold text-slate-900 mb-4">Highlights</h3>
@@ -148,8 +146,7 @@ export default function CarDetailPage({ id, onBack }) {
   );
 }
 
-// --- SUB COMPONENTS ---
-
+// ... (Sub Components SpecItem & HighlightItem tetap sama)
 function SpecItem({ icon, label, value, isMetric }) {
   // Parsing: Memisahkan (Prefix) + (Angka) + (Suffix)
   const parts = value ? value.toString().match(/^(\D*)(\d+(?:[\.,]\d+)?)(\D*)$/) : null;
