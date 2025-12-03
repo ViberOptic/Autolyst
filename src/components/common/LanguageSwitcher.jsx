@@ -26,12 +26,17 @@ export default function LanguageSwitcher({ variant = 'default' }) {
       const style = document.createElement('style');
       style.id = 'google-translate-styles';
       style.innerHTML = `
-        .goog-te-banner-frame.skiptranslate {
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+        
+        iframe.goog-te-banner-frame {
             display: none !important;
         }
         
         body {
             top: 0px !important;
+            position: static !important; 
         }
         
         .goog-te-gadget-icon {
