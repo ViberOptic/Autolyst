@@ -22,53 +22,6 @@ export default function LanguageSwitcher({ variant = 'default' }) {
       document.body.appendChild(div);
     }
 
-    if (!document.getElementById('google-translate-styles')) {
-      const style = document.createElement('style');
-      style.id = 'google-translate-styles';
-      style.innerHTML = `
-        .goog-te-banner-frame {
-            display: none !important;
-        }
-        
-        iframe.goog-te-banner-frame {
-            display: none !important;
-        }
-        
-        body {
-            top: 0px !important;
-            position: static !important; 
-        }
-        
-        .goog-te-gadget-icon {
-            display: none !important;
-            width: 0px !important;
-            height: 0px !important;
-        }
-        
-        #goog-gt-tt, 
-        .goog-te-balloon-frame, 
-        .goog-tooltip, 
-        .goog-te-hover-frame {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
-        }
-        
-        .goog-text-highlight {
-            background-color: transparent !important;
-            box-shadow: none !important;
-            border: none !important;
-        }
-        
-        font {
-            background-color: transparent !important;
-            box-shadow: none !important;
-        }
-      `;
-      document.head.appendChild(style);
-    }
-
     if (!window.googleTranslateElementInit) {
       window.googleTranslateElementInit = () => {
         new window.google.translate.TranslateElement({
