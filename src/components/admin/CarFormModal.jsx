@@ -2,8 +2,10 @@
 import { useState, useEffect } from 'react';
 import { X, Save, Loader2, UploadCloud } from 'lucide-react';
 import { formatCurrency } from '../../utils/helpers';
+import { useGoogleTranslate } from '../../hooks/useGoogleTranslate';
 
 export default function CarFormModal({ isOpen, onClose, onSubmit, initialData }) {
+  const { currentLang } = useGoogleTranslate();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -58,13 +60,13 @@ export default function CarFormModal({ isOpen, onClose, onSubmit, initialData })
   const renderPreviewPrice = (numericVal) => {
     if (!numericVal) return <span className="text-xs text-blue-600 font-medium">-</span>;
     
-    const { value, unit } = formatCurrency(numericVal);
+    const { value, unit } = formatCurrency(numericVal, currentLang);
 
     return (
       <div className="flex items-baseline gap-1 text-xs text-blue-600 font-bold">
         <span className="notranslate">Rp</span>
         <span className="notranslate">{value}</span>
-        <span>{unit}</span>
+        <span className="notranslate">{unit}</span>
       </div>
     );
   };

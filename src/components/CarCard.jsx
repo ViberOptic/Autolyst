@@ -2,9 +2,11 @@
 import { Zap, Fuel } from 'lucide-react';
 import FavoriteButton from './common/FavoriteButton';
 import { formatCurrency } from '../utils/helpers';
+import { useGoogleTranslate } from '../hooks/useGoogleTranslate';
 
 export default function CarCard({ car, onClick }) {
-  const { value, unit } = formatCurrency(car.price);
+  const { currentLang } = useGoogleTranslate();
+  const { value, unit } = formatCurrency(car.price, currentLang);
 
   return (
     <div 
@@ -48,7 +50,7 @@ export default function CarCard({ car, onClick }) {
           <div className="flex items-baseline gap-1 text-blue-700 font-bold text-sm whitespace-nowrap">
             <span className="notranslate">Rp</span>
             <span className="notranslate">{value}</span>
-            {unit && <span>{unit}</span>}
+            <span className="notranslate">{unit}</span>
           </div>
         </div>
       </div>

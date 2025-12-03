@@ -1,9 +1,18 @@
 // src/components/common/CarFilter.jsx
 import { Filter, X } from 'lucide-react';
+import { formatCurrency } from '../../utils/helpers';
+import { useGoogleTranslate } from '../../hooks/useGoogleTranslate';
 
 export default function CarFilter({ filters, setFilters, onReset }) {
+  const { currentLang } = useGoogleTranslate();
+
   const handleChange = (key, value) => {
     setFilters(prev => ({ ...prev, [key]: value }));
+  };
+
+  const getPriceLabel = (val) => {
+    const { value, unit } = formatCurrency(val, currentLang);
+    return `${value} ${unit}`;
   };
 
   const brands = [
@@ -64,9 +73,15 @@ export default function CarFilter({ filters, setFilters, onReset }) {
             className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-700 focus:ring-2 focus:ring-blue-500 outline-none"
           >
             <option value="all">Semua Harga</option>
-            <option value="under_500">Di bawah 500 Juta</option>
-            <option value="500_1000">500 Juta - 1 Miliar</option>
-            <option value="above_1000">Di atas 1 Miliar</option>
+            <option value="under_500">
+              &lt; <span className="notranslate">{getPriceLabel(500000000)}</span>
+            </option>
+            <option value="500_1000">
+              <span className="notranslate">{getPriceLabel(500000000)}</span> - <span className="notranslate">{getPriceLabel(1000000000)}</span>
+            </option>
+            <option value="above_1000">
+              &gt; <span className="notranslate">{getPriceLabel(1000000000)}</span>
+            </option>
           </select>
         </div>
       </div>
