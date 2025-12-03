@@ -24,8 +24,8 @@ body {
 }
 
 #goog-gt-tt, 
-.goog-te-balloon-frame, 
-.goog-tooltip, 
+.goog-te-balloon-frame,
+.goog-tooltip,
 .goog-te-hover-frame {
     display: none !important;
     visibility: hidden !important;
