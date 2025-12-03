@@ -175,6 +175,9 @@ VALUES
 (24, 'Citroen e-C3', 'Citroen', 'Electric', 'Rp 377.000.000', 377000000, 'Electric Motor', '57 HP', 'https://www.topgear.com/sites/default/files/2025/04/1%20Citroen%20eC3%20review%202025%20UK_1.jpg', 'City car listrik bergaya Eropa yang mengutamakan kenyamanan suspensi.', false),
 
 (25, 'Ferrari SF90 Stradale', 'Ferrari', 'Hybrid', 'Rp 18.000.000.000', 18000000000, 'V8 PHEV', '986 HP', 'https://cdn.motor1.com/images/mgl/qkk7zv/s3/novitec-ferrari-sf90-stradale-2022.jpg', 'Hypercar plug-in hybrid Ferrari paling bertenaga yang legal di jalan raya.', false);
+
+-- Reset sequence ID tabel cars ke angka tertinggi yang ada
+SELECT setval('cars_id_seq', (SELECT MAX(id) FROM public.cars));
 ```
 
 4. Pergi ke Project Settings > API. Salin Project URL dan anon public key.
