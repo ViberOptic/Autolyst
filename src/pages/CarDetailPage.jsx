@@ -146,12 +146,9 @@ export default function CarDetailPage({ id, onBack }) {
   );
 }
 
-// ... (Sub Components SpecItem & HighlightItem tetap sama)
 function SpecItem({ icon, label, value, isMetric }) {
-  // Parsing: Memisahkan (Prefix) + (Angka) + (Suffix)
   const parts = value ? value.toString().match(/^(\D*)(\d+(?:[\.,]\d+)?)(\D*)$/) : null;
 
-  // Helper: Memisahkan "Unit" (kata pertama) dari "Sisa Teks"
   const getSuffixParts = (suffix) => {
     if (!suffix) return { unit: '', rest: '' };
     const trimmed = suffix.trim();
@@ -177,16 +174,12 @@ function SpecItem({ icon, label, value, isMetric }) {
           const { unit, rest } = getSuffixParts(parts[3]);
           return (
             <p className="font-semibold text-slate-900 text-sm sm:text-base leading-snug">
-              {/* Prefix */}
               {parts[1] && <span>{parts[1].trim()} </span>}
               
-              {/* Angka (Tidak diterjemahkan) */}
               <span className="notranslate">{parts[2]}</span>
               
-              {/* Unit (misal: "L", "HP") - Diberi Jarak Spasi Eksplisit */}
               {unit && <span className={isMetric ? 'notranslate' : ''}> {unit}</span>}
               
-              {/* Sisa Teks (misal: "Hybrid System") */}
               {rest && <span> {rest}</span>}
             </p>
           );

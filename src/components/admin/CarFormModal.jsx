@@ -38,8 +38,6 @@ export default function CarFormModal({ isOpen, onClose, onSubmit, initialData })
 
   const handlePriceValueChange = (e) => {
     const val = e.target.value;
-    // Simpan harga dalam format standar "Rp 850.000.000" agar konsisten di database
-    // Komponen lain (CarCard) yang akan mengubahnya jadi "Juta/Miliar"
     let displayPrice = '';
     if (val) {
       const num = parseInt(val);
@@ -56,7 +54,6 @@ export default function CarFormModal({ isOpen, onClose, onSubmit, initialData })
     setLoading(false);
   };
 
-  // Preview untuk Admin (Notasi Pintar)
   const renderPreviewPrice = (numericVal) => {
     if (!numericVal) return <span className="text-xs text-blue-600 font-medium">-</span>;
     

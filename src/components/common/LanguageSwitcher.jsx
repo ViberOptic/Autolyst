@@ -15,28 +15,29 @@ export default function LanguageSwitcher({ variant = 'default' }) {
   ];
 
   useEffect(() => {
-    // Helper untuk membaca cookie dengan aman
     const getCookie = (name) => {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
+      const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      return match ? match[2] : null;
     };
 
     const googTrans = getCookie('googtrans');
     if (googTrans) {
-      // Ambil kode bahasa terakhir (misal: /auto/en -> en)
-      const langCode = googTrans.split('/').pop();
-      if (langCode) {
-        setCurrentLang(langCode);
+      const langCode = googTrans.split('/').pop();      
+      const matchedLang = languages.find(
+        (l) => l.code.toLowerCase() === langCode?.toLowerCase()
+      );
+
+      if (matchedLang) {
+        setCurrentLang(matchedLang.code);
       }
     }
   }, []);
 
   const changeLanguage = (langCode) => {
-    // Set cookie untuk Google Translate
-    document.cookie = `googtrans=/auto/${langCode}; path=/; domain=${window.location.hostname}`;
-    document.cookie = `googtrans=/auto/${langCode}; path=/;`;
-    
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}`;
+    const newCookie = `/auto/${langCode}`;
+    document.cookie = `googtrans=${newCookie}; path=/;`;
     setCurrentLang(langCode);
     setIsOpen(false);
     window.location.reload(); 
@@ -66,7 +67,6 @@ export default function LanguageSwitcher({ variant = 'default' }) {
       >
         <div className="flex items-center gap-2">
           <Languages className="w-5 h-5" />
-          {/* Class notranslate agar nama bahasa tidak diterjemahkan ulang */}
           <span className="notranslate">
             {currentLangLabel}
           </span>
@@ -80,7 +80,7 @@ export default function LanguageSwitcher({ variant = 'default' }) {
             className="fixed inset-0 z-40" 
             onClick={() => setIsOpen(false)} 
           />
-          <div className={`absolute bg-white rounded-xl shadow-xl border border-slate-100 py-1 z-50 animate-in fade-in zoom-in-95 duration-200 max-h-60 overflow-y-auto custom-scrollbar ${activeStyle.dropdown}`}>
+          <div className={`absolute bg-white rounded-xl shadow-xlQl border border-slate-100 py-1 z-50 animate-in fade-in zoom-in-95 duration-200 max-h-60 overflow-y-auto custom-scrollbar ${activeStyle.dropdown}`}>
             {languages.map((lang) => (
               <button
                 key={lang.code}

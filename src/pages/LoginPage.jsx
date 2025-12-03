@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
 import logoUrl from '../assets/LOGORN.png';
-import LanguageSwitcher from '../components/common/LanguageSwitcher'; // Import Komponen Bahasa
+import LanguageSwitcher from '../components/common/LanguageSwitcher';
 
 export default function LoginPage({ onNavigate }) {
   const { signIn } = useAuth();
@@ -31,16 +31,13 @@ export default function LoginPage({ onNavigate }) {
 
   return (
     <div className="min-h-screen flex bg-white font-sans">
-      {/* BAGIAN KIRI: Form Login */}
       <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 sm:px-12 lg:px-24 py-12 relative">
         
-        {/* Tombol Ganti Bahasa (Pojok Kanan Atas Container Form) */}
         <div className="absolute top-6 right-6 z-20">
           <LanguageSwitcher variant="default" />
         </div>
 
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          {/* Logo & Header */}
           <div className="mb-10 text-center sm:text-left">
             <img 
               src={logoUrl} 
@@ -55,7 +52,6 @@ export default function LoginPage({ onNavigate }) {
             </p>
           </div>
 
-          {/* Error Message */}
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 text-sm font-medium rounded-xl flex items-center gap-3 animate-in fade-in slide-in-from-top-2">
               <AlertCircle className="w-5 h-5 shrink-0" />
@@ -63,7 +59,6 @@ export default function LoginPage({ onNavigate }) {
             </div>
           )}
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-2">Email</label>
@@ -110,7 +105,6 @@ export default function LoginPage({ onNavigate }) {
             </button>
           </form>
 
-          {/* Footer Link */}
           <div className="mt-8 text-center pt-6 border-t border-slate-100">
             <p className="text-slate-600">
               Belum punya akun?{' '}
@@ -125,7 +119,6 @@ export default function LoginPage({ onNavigate }) {
         </div>
       </div>
 
-      {/* BAGIAN KANAN: Gambar Visual (Desktop Only) */}
       <div className="hidden lg:block lg:w-1/2 relative bg-slate-900 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/90 via-slate-900/80 to-slate-900/90 z-10 mix-blend-multiply" />
         <img 
@@ -134,7 +127,6 @@ export default function LoginPage({ onNavigate }) {
           className="absolute inset-0 w-full h-full object-cover transform scale-105 hover:scale-110 transition-transform duration-[20s] ease-linear"
         />
         
-        {/* Dekorasi Teks */}
         <div className="relative z-20 h-full flex flex-col justify-end p-20 text-white">
           <div className="space-y-4">
             <div className="inline-block px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">

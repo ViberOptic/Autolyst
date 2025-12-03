@@ -2,15 +2,13 @@
 import { supabase } from '../config/supabase';
 
 export const carService = {
-  // 1. Tambah Mobil Baru
   async createCar(carData) {
     try {
-      // Konversi price_value ke integer untuk keamanan data
       const payload = {
         ...carData,
         price_value: parseInt(carData.price_value),
         created_at: new Date().toISOString(),
-        is_featured: false // Default tidak masuk featured
+        is_featured: false
       };
 
       const { data, error } = await supabase
@@ -27,7 +25,6 @@ export const carService = {
     }
   },
 
-  // 2. Update Mobil
   async updateCar(id, carData) {
     try {
       const payload = {
@@ -50,7 +47,6 @@ export const carService = {
     }
   },
 
-  // 3. Hapus Mobil
   async deleteCar(id) {
     try {
       const { error } = await supabase

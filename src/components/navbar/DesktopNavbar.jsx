@@ -1,6 +1,6 @@
 // src/components/navbar/DesktopNavbar.jsx
 import logoUrl from '../../assets/LOGORN.png';
-import LanguageSwitcher from '../common/LanguageSwitcher'; // Import component
+import LanguageSwitcher from '../common/LanguageSwitcher';
 
 export default function DesktopNavbar({ currentPage, onNavigate }) {
   const navItems = [
@@ -16,7 +16,6 @@ export default function DesktopNavbar({ currentPage, onNavigate }) {
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           
-          {/* Logo Section */}
           <div 
             className="flex items-center space-x-3 cursor-pointer" 
             onClick={() => onNavigate('home')}
@@ -36,7 +35,6 @@ export default function DesktopNavbar({ currentPage, onNavigate }) {
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Navigation Links */}
             <div className="flex items-center space-x-1">
               {navItems.map((item) => (
                 <button
@@ -53,10 +51,8 @@ export default function DesktopNavbar({ currentPage, onNavigate }) {
               ))}
             </div>
 
-            {/* Separator */}
             <div className="h-6 w-px bg-slate-200 mx-2"></div>
 
-            {/* Language Switcher */}
             <LanguageSwitcher />
           </div>
          

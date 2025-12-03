@@ -1,7 +1,6 @@
 import { supabase } from '../config/supabase';
 
 class FavoriteService {
-  // Helper untuk mendapatkan user saat ini
   async _getCurrentUser() {
     const { data: { user } } = await supabase.auth.getUser();
     return user;
@@ -11,13 +10,12 @@ class FavoriteService {
     try {
       const user = await this._getCurrentUser();
       
-      // Jika user belum login, kembalikan array kosong (atau bisa throw error untuk redirect)
       if (!user) return { success: true, data: [] };
 
       const { data, error } = await supabase
         .from('favorites')
         .select('car_id')
-        .eq('user_identifier', user.id); // Gunakan ID user asli
+        .eq('user_identifier', user.id);
       
       if (error) throw error;
       return { success: true, data: data.map(f => f.car_id) };
@@ -35,7 +33,6 @@ class FavoriteService {
       const user = await this._getCurrentUser();
       if (!user) return { success: false, message: "Silakan login untuk menyimpan favorit." };
 
-      // Cek data untuk user ini
       const { data: existing, error: fetchError } = await supabase
         .from('favorites')
         .select('id')
@@ -46,7 +43,6 @@ class FavoriteService {
       if (fetchError) throw fetchError;
 
       if (existing) {
-        // Hapus
         const { error: deleteError } = await supabase
           .from('favorites')
           .delete()
@@ -55,11 +51,10 @@ class FavoriteService {
         if (deleteError) throw deleteError;
         return { success: true, action: 'removed' };
       } else {
-        // Tambah
         const { error: insertError } = await supabase
           .from('favorites')
           .insert([{ 
-            user_identifier: user.id, // Simpan ID user asli
+            user_identifier: user.id,
             car_id: car_id 
           }]);
           

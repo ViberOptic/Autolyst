@@ -6,7 +6,6 @@ export default function CarFilter({ filters, setFilters, onReset }) {
     setFilters(prev => ({ ...prev, [key]: value }));
   };
 
-  // Daftar merek lengkap sesuai src/data/cars.js
   const brands = [
     "BMW", "BYD", "Chery", "Citroen", "Ferrari", 
     "Honda", "Hyundai", "Kia", "Lexus", "Mazda", 
@@ -30,7 +29,6 @@ export default function CarFilter({ filters, setFilters, onReset }) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* Filter 1: Merek (Diupdate Lengkap) */}
         <div>
           <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wider">Merek</label>
           <select
@@ -45,7 +43,6 @@ export default function CarFilter({ filters, setFilters, onReset }) {
           </select>
         </div>
 
-        {/* Filter 2: Penggerak */}
         <div>
           <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wider">Tipe Penggerak</label>
           <select
@@ -59,7 +56,6 @@ export default function CarFilter({ filters, setFilters, onReset }) {
           </select>
         </div>
 
-        {/* Filter 3: Harga */}
         <div>
           <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wider">Rentang Harga</label>
           <select

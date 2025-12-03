@@ -1,7 +1,6 @@
 // src/hooks/useFavorites.js
 import { useState, useEffect, useCallback } from 'react';
 import favoriteService from '../services/favoriteService';
-// Hapus import getUserIdentifier karena tidak dipakai lagi
 
 export function useIsFavorited(carId) {
   const [isFavorited, setIsFavorited] = useState(false);
@@ -13,7 +12,6 @@ export function useIsFavorited(carId) {
         return;
     }
     
-    // Tidak perlu kirim userId
     const { success, data } = await favoriteService.getFavorites();
     
     if (success && Array.isArray(data)) {
@@ -29,11 +27,9 @@ export function useIsFavorited(carId) {
   const toggleFavorite = async () => {
     if (!carId) return;
 
-    // Optimistic Update
     const previousState = isFavorited;
     setIsFavorited(!previousState);
 
-    // Cukup kirim car_id saja
     const result = await favoriteService.toggleFavorite({
       car_id: parseInt(carId)
     });
@@ -55,7 +51,6 @@ export function useFavorites() {
 
   const fetchFavorites = useCallback(async () => {
     setLoading(true);
-    // Tidak perlu kirim userId
     const { success, data } = await favoriteService.getFavorites();
     
     if (success) {

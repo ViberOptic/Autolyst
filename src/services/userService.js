@@ -4,20 +4,10 @@ const USER_PROFILE_KEY = 'user_profile';
 const USER_IDENTIFIER_KEY = 'user_identifier';
 
 export const getUserIdentifier = () => {
-  // -----------------------------------------------------------
-  // PENTING: Ganti tulisan di bawah ini dengan ID dari Supabase
-  // Contoh: const STATIC_ID = 'user_1740615291234_ab12cd34';
-  // -----------------------------------------------------------
-  
-  // PASTE ID DARI SUPABASE DI SINI (di dalam tanda kutip):
   const STATIC_ID = 'user_1764176162219_2voqbw54q'; 
-  
-  // Kode ini memaksa localStorage untuk menggunakan ID tersebut
-  // sehingga HP dan Desktop akan membaca data yang sama.
   if (localStorage.getItem(USER_IDENTIFIER_KEY) !== STATIC_ID) {
     localStorage.setItem(USER_IDENTIFIER_KEY, STATIC_ID);
   }
-  
   return STATIC_ID;
 };
 

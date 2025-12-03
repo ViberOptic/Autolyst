@@ -4,7 +4,6 @@ import FavoriteButton from './common/FavoriteButton';
 
 export default function CarCard({ car, onClick }) {
   
-  // Helper: Format Harga Pintar
   const getPriceParts = (priceString) => {
     if (!priceString) return { value: '', unit: '' };
 

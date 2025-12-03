@@ -1,21 +1,18 @@
 // src/components/home/FeaturedCarsSection.jsx
 import { useState, useEffect, useRef } from 'react';
-import CarCard from '../CarCard'; // Pastikan import CarCard
+import CarCard from '../CarCard';
 
 export default function FeaturedCarsSection({ title, cars, onCarClick, linkLabel, onLinkClick }) {
   const [visibleItems, setVisibleItems] = useState(new Set());
   const itemRefs = useRef([]);
 
-  // Logika Animasi: Mendeteksi saat elemen muncul di layar
   useEffect(() => {
-    // Reset refs saat data cars berubah
     itemRefs.current = itemRefs.current.slice(0, cars.length);
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const index = parseInt(entry.target.dataset.index);
-          // Beri delay sedikit agar muncul berurutan (staggered effect)
           setTimeout(() => {
             setVisibleItems(prev => new Set(prev).add(index));
           }, (index % 3) * 150); 
@@ -64,7 +61,6 @@ export default function FeaturedCarsSection({ title, cars, onCarClick, linkLabel
                 : 'translate-y-12 opacity-0'
             }`}
           >
-            {/* Render component CarCard di sini */}
             <CarCard car={car} onClick={onCarClick} />
           </div>
         ))}

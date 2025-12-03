@@ -14,7 +14,7 @@ URL: https://autolys.vercel.app/
 * **Pencarian & Filter Canggih:** Filter mobil berdasarkan merek, kategori teknologi, dan rentang harga (server-side filtering).
 * **Autentikasi Pengguna:** Sistem Login dan Register aman menggunakan Supabase Auth.
 * **Manajemen Favorit (Cloud):** Simpan mobil impian ke database cloud yang tersinkronisasi antar perangkat.
-* **Admin Dashboard:** Halaman khusus (/manage) untuk menambah, mengedit, dan menghapus data mobil (CRUD).
+* **Admin Dashboard:** Halaman khusus untuk menambah, mengedit, dan menghapus data mobil (CRUD).
 * **Multi-Bahasa:** Dukungan alih bahasa (Indonesia, Inggris, Jepang, Korea, Mandarin) menggunakan integrasi Google Translate.
 * **Rekomendasi Sultan:** Halaman terkurasi untuk mobil-mobil high-end dengan harga di atas 1 Milyar.
 * **PWA Ready:** Dapat diinstal di Smartphone (Android/iOS) dan Desktop, serta berfungsi dalam kondisi koneksi lambat.

@@ -12,7 +12,6 @@ export default function MobileNavbar({ currentPage, onNavigate }) {
 
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 pb-safe pt-2 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
-      {/* Grid diubah menjadi 5 kolom agar pas */}
       <div className="grid grid-cols-5 gap-1 px-1 pb-2 w-full">
         {navItems.map((item) => {
           const IconComponent = item.icon;

@@ -3,12 +3,10 @@ import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  // Tambahkan blok server ini:
   server: {
-    host: true, // Ini mengizinkan akses dari IP Network (0.0.0.0)
-    port: 5173, // Port default
+    host: true,
+    port: 5173,
   },
   plugins: [react(), VitePWA(), tailwindcss(),({
     registerType: 'autoUpdate',
@@ -21,7 +19,7 @@ export default defineConfig({
     },
 
     manifest: {
-      name: 'Autolys', // Jangan lupa update nama di sini juga jika belum
+      name: 'Autolys',
       short_name: 'Autolys',
       description: 'Katalog Mobil Digital Terlengkap 2025',
       theme_color: '#2563eb',
@@ -63,7 +61,7 @@ export default defineConfig({
     },
 
     devOptions: {
-      enabled: false, // Bisa diubah ke true untuk debug PWA di mode dev
+      enabled: false,
       navigateFallback: 'index.html',
       suppressWarnings: true,
       type: 'module',

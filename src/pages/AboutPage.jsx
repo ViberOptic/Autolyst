@@ -30,7 +30,6 @@ export default function AboutPage({ onNavigate }) {
     <div className="pt-8 px-4 pb-24 md:pb-10">
       <div className="max-w-4xl mx-auto space-y-8">
         
-        {/* 1. Header Section */}
         <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 text-center relative">
           
           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-t-3xl" />
@@ -55,11 +54,8 @@ export default function AboutPage({ onNavigate }) {
             Platform katalog mobil listrik dan hybrid masa depan. Temukan spesifikasi lengkap, harga, dan simpan mobil impian Anda dalam satu aplikasi modern.
           </p>
 
-          {/* Area Pengaturan & Aksi */}
           <div className="mt-8 flex flex-col items-center gap-4">
             
-            {/* Language Switcher UI */}
-            {/* PERBAIKAN: Ditambahkan class 'md:hidden' agar hilang di Desktop (karena sudah ada di Navbar) */}
             <div className="flex flex-col items-center gap-2 p-4 bg-slate-50 rounded-xl w-full max-w-sm border border-slate-100 shadow-sm relative z-20 md:hidden">
                 <span className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
                     <Globe className="w-3.5 h-3.5" /> Pengaturan Bahasa
@@ -69,7 +65,6 @@ export default function AboutPage({ onNavigate }) {
                 </div>
             </div>
 
-            {/* Action Buttons */}
             <div className="flex justify-center gap-3 flex-wrap mt-2 relative z-10">
               <button 
                 onClick={() => onNavigate('manage')}
@@ -90,7 +85,6 @@ export default function AboutPage({ onNavigate }) {
           </div>
         </div>
 
-        {/* 2. Features Grid */}
         <div className="relative z-0">
           <h2 className="text-xl font-bold text-slate-800 mb-4 px-2">Keunggulan Aplikasi</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -108,7 +102,6 @@ export default function AboutPage({ onNavigate }) {
           </div>
         </div>
 
-        {/* 3. Tech Stack & Developer Info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-0">
           <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
             <div className="flex items-center gap-2 mb-4">

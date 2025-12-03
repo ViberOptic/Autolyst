@@ -16,7 +16,6 @@ import MobileNavbar from './components/navbar/MobileNavbar';
 import './index.css'
 import PWABadge from './PWABadge';
 
-// --- FIX GOOGLE TRANSLATE CRASH (Monkey Patch) ---
 if (typeof Node === 'function' && Node.prototype) {
   const originalRemoveChild = Node.prototype.removeChild;
   Node.prototype.removeChild = function (child) {
@@ -40,7 +39,6 @@ if (typeof Node === 'function' && Node.prototype) {
     return originalInsertBefore.apply(this, arguments);
   };
 }
-// ---------------------------------------------------
 
 function AppContent() {
   const { user, loading: authLoading } = useAuth();
@@ -56,7 +54,6 @@ function AppContent() {
   useEffect(() => {
     if (!showSplash && !authLoading) {
       if (!user) {
-        // Izinkan akses ke register juga saat belum login
         if (page !== 'register') {
           setPage('login');
         }

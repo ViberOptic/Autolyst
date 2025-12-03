@@ -2,7 +2,6 @@
 import { useRegisterSW } from 'virtual:pwa-register/react'
 
 function PWABadge() {
-  // check for updates every hour
   const period = 60 * 60 * 1000
   const {
     offlineReady: [offlineReady, setOfflineReady],
@@ -16,7 +15,6 @@ function PWABadge() {
       }
       else if (r?.installing) {
         r.installing.addEventListener('statechange', (e) => {
-          /** @type {ServiceWorker} */
           const sw = e.target
           if (sw.state === 'activated')
             registerPeriodicSync(period, swUrl, r)
@@ -69,12 +67,6 @@ function PWABadge() {
 
 export default PWABadge
 
-/**
- * This function will register a periodic sync check every hour, you can modify the interval as needed.
- * @param period {number}
- * @param swUrl {string}
- * @param r {ServiceWorkerRegistration}
- */
 function registerPeriodicSync(period, swUrl, r) {
   if (period <= 0) return
   setInterval(async () => {

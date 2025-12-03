@@ -48,7 +48,6 @@ export default function RecommendationPage({ onCarClick }) {
               ))}
             </div>
             
-            {/* PERBAIKAN: Wrapper untuk memberikan jarak pada pagination */}
             <div className="py-8">
               <ModernPagination currentPage={page} totalPages={pagination.totalPages} onPageChange={handlePageChange} />
             </div>

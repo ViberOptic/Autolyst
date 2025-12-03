@@ -2,15 +2,9 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function ModernPagination({ currentPage, totalPages, onPageChange }) {
-  // Jika halaman cuma 1, tidak perlu tampilkan pagination
   if (totalPages <= 1) return null;
-
-  // Helper untuk membuat array angka halaman
   const getPageNumbers = () => {
     const pages = [];
-    // Logika sederhana: Tampilkan semua jika halaman sedikit (< 7)
-    // Jika halaman banyak, logika "..." bisa ditambahkan nanti. 
-    // Karena data cuma 20 (4 halaman), kita tampilkan semua.
     for (let i = 1; i <= totalPages; i++) {
       pages.push(i);
     }
@@ -19,7 +13,6 @@ export default function ModernPagination({ currentPage, totalPages, onPageChange
 
   return (
     <div className="flex items-center justify-center gap-2 mt-12">
-      {/* Tombol Prev */}
       <button
         onClick={() => onPageChange(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
 import logoUrl from '../assets/LOGORN.png';
-import LanguageSwitcher from '../components/common/LanguageSwitcher'; // Import Komponen Bahasa
+import LanguageSwitcher from '../components/common/LanguageSwitcher';
 
 export default function RegisterPage({ onNavigate }) {
   const { signUp } = useAuth();
@@ -31,11 +31,9 @@ export default function RegisterPage({ onNavigate }) {
     }
   };
 
-  // Tampilan Sukses Registrasi
   if (success) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4 relative">
-        {/* Tombol Bahasa (Pojok Kanan Atas Layar) */}
         <div className="absolute top-6 right-6">
           <LanguageSwitcher variant="boxed" />
         </div>
@@ -62,7 +60,6 @@ export default function RegisterPage({ onNavigate }) {
 
   return (
     <div className="min-h-screen flex bg-white font-sans">
-      {/* BAGIAN KIRI: Gambar Visual (Desktop Only) - Kebalikan dari Login */}
       <div className="hidden lg:block lg:w-1/2 relative bg-slate-900 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-bl from-indigo-900/90 via-slate-900/80 to-slate-900/90 z-10 mix-blend-multiply" />
         <img 
@@ -84,10 +81,8 @@ export default function RegisterPage({ onNavigate }) {
         </div>
       </div>
 
-      {/* BAGIAN KANAN: Form Register */}
       <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 sm:px-12 lg:px-24 py-12 relative">
         
-        {/* Tombol Ganti Bahasa (Pojok Kanan Atas Container Form) */}
         <div className="absolute top-6 right-6 z-20">
           <LanguageSwitcher variant="default" />
         </div>
