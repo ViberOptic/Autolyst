@@ -26,12 +26,40 @@ export default function LanguageSwitcher({ variant = 'default' }) {
       const style = document.createElement('style');
       style.id = 'google-translate-styles';
       style.innerHTML = `
-        .goog-te-banner-frame.skiptranslate { display: none !important; }
-        .goog-te-gadget-icon { display: none !important; width: 0 !important; height: 0 !important; }
-        #goog-gt-tt, .goog-te-balloon-frame, .goog-tooltip, .goog-te-hover-frame { display: none !important; visibility: hidden !important; }
-        .goog-text-highlight { background: transparent !important; box-shadow: none !important; }
-        font { background-color: transparent !important; box-shadow: none !important; }
-        body { top: 0 !important; position: static !important; }
+        .goog-te-banner-frame.skiptranslate {
+            display: none !important;
+        }
+        
+        body {
+            top: 0px !important;
+        }
+        
+        .goog-te-gadget-icon {
+            display: none !important;
+            width: 0px !important;
+            height: 0px !important;
+        }
+        
+        #goog-gt-tt, 
+        .goog-te-balloon-frame, 
+        .goog-tooltip, 
+        .goog-te-hover-frame {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+        
+        .goog-text-highlight {
+            background-color: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+        
+        font {
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
       `;
       document.head.appendChild(style);
     }
@@ -41,7 +69,8 @@ export default function LanguageSwitcher({ variant = 'default' }) {
         new window.google.translate.TranslateElement({
           pageLanguage: 'id',
           includedLanguages: 'id,en,ja,ko,zh-CN',
-          autoDisplay: false
+          autoDisplay: false,
+          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
         }, 'google_translate_element');
       };
     }

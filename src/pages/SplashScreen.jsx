@@ -6,6 +6,7 @@ import LogoContainer from '../components/splash/LogoContainer';
 import TitleSection from '../components/splash/TitleSection';
 import LoadingAnimation from '../components/splash/LoadingAnimation';
 import Footer from '../components/splash/Footer';
+import LanguageSwitcher from '../components/common/LanguageSwitcher';
 
 export default function SplashScreen({ onComplete }) {
   const [progress, setProgress] = useState(0);
@@ -51,6 +52,10 @@ export default function SplashScreen({ onComplete }) {
         fadeOut ? 'opacity-0 scale-105' : ''
       }`}
     >
+
+      <div className="hidden">
+        <LanguageSwitcher />
+      </div>
       
       <BackgroundPattern fadeOut={fadeOut} />
       <FloatingElements fadeOut={fadeOut} />
