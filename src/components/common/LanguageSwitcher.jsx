@@ -1,70 +1,27 @@
 // src/components/common/LanguageSwitcher.jsx
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Languages, ChevronDown, Check } from 'lucide-react';
+import { useGoogleTranslate } from '../../hooks/useGoogleTranslate';
+
+const LANGUAGES = [
+  { code: 'id', label: 'Indonesia', flag: 'https://flagcdn.com/w40/id.png' },
+  { code: 'en', label: 'English', flag: 'https://flagcdn.com/w40/us.png' },
+  { code: 'ja', label: '日本語 (Japan)', flag: 'https://flagcdn.com/w40/jp.png' },
+  { code: 'ko', label: '한국어 (Korea)', flag: 'https://flagcdn.com/w40/kr.png' },
+  { code: 'zh-CN', label: '中文 (China)', flag: 'https://flagcdn.com/w40/cn.png' },
+];
 
 export default function LanguageSwitcher({ variant = 'default' }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState('id');
+  
+  const { currentLang, changeLanguage } = useGoogleTranslate();
 
-  const languages = [
-    { code: 'id', label: 'Indonesia', flag: 'https://flagcdn.com/w40/id.png' },
-    { code: 'en', label: 'English', flag: 'https://flagcdn.com/w40/us.png' },
-    { code: 'ja', label: '日本語 (Japan)', flag: 'https://flagcdn.com/w40/jp.png' },
-    { code: 'ko', label: '한국어 (Korea)', flag: 'https://flagcdn.com/w40/kr.png' },
-    { code: 'zh-CN', label: '中文 (China)', flag: 'https://flagcdn.com/w40/cn.png' },
-  ];
-
-  useEffect(() => {
-    if (!document.getElementById('google_translate_element')) {
-      const div = document.createElement('div');
-      div.id = 'google_translate_element';
-      div.style.display = 'none';
-      document.body.appendChild(div);
-    }
-
-    if (!window.googleTranslateElementInit) {
-      window.googleTranslateElementInit = () => {
-        new window.google.translate.TranslateElement({
-          pageLanguage: 'id',
-          includedLanguages: 'id,en,ja,ko,zh-CN',
-          autoDisplay: false,
-          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
-      };
-    }
-
-    if (!document.getElementById('google-translate-script')) {
-      const script = document.createElement('script');
-      script.id = 'google-translate-script';
-      script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      script.async = true;
-      document.body.appendChild(script);
-    }
-
-    const getCookie = (name) => {
-      const v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-      return v ? v[2] : null;
-    };
-    const googTrans = getCookie('googtrans');
-    if (googTrans) {
-      const lang = googTrans.split('/').pop();
-      if (lang) setCurrentLang(lang);
-    }
-  }, []);
-
-  const changeLanguage = (langCode) => {
-    const domain = window.location.hostname;
-    document.cookie = `googtrans=;Vk=1;path=/;expires=Thu, 01 Jan 1970 00:00:00 UTC;domain=.${domain}`;
-    document.cookie = `googtrans=;Vk=1;path=/;expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
-    
-    const value = `/auto/${langCode}`;
-    document.cookie = `googtrans=${value};path=/;domain=.${domain}`;
-    document.cookie = `googtrans=${value};path=/;`;
-
-    setCurrentLang(langCode);
+  const handleLanguageChange = (code) => {
+    changeLanguage(code);
     setIsOpen(false);
-    window.location.reload();
   };
+
+  const currentLabel = LANGUAGES.find(l => l.code === currentLang)?.label || 'Indonesia';
 
   const styles = {
     default: {
@@ -80,10 +37,11 @@ export default function LanguageSwitcher({ variant = 'default' }) {
   };
 
   const activeStyle = styles[variant] || styles.default;
-  const currentLabel = languages.find(l => l.code === currentLang)?.label || 'Indonesia';
 
   return (
     <div className={`relative ${activeStyle.wrapper}`}>
+      <div id="google_translate_element" className="hidden" style={{ display: 'none' }}></div>
+
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`flex items-center gap-2 px-3 py-2 rounded-lg border-slate-200 hover:bg-slate-50 transition-colors font-medium text-sm ${activeStyle.button}`}
@@ -99,10 +57,10 @@ export default function LanguageSwitcher({ variant = 'default' }) {
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
           <div className={`absolute bg-white rounded-xl shadow-xl border border-slate-100 py-1 z-50 animate-in fade-in zoom-in-95 duration-200 max-h-60 overflow-y-auto custom-scrollbar ${activeStyle.dropdown}`}>
-            {languages.map((lang) => (
+            {LANGUAGES.map((lang) => (
               <button
                 key={lang.code}
-                onClick={() => changeLanguage(lang.code)}
+                onClick={() => handleLanguageChange(lang.code)}
                 className={`w-full text-left px-4 py-3 text-sm flex items-center justify-between hover:bg-slate-50 transition-colors border-b border-slate-50 last:border-0 ${
                   currentLang === lang.code ? 'text-blue-600 font-medium bg-blue-50/50' : 'text-slate-600'
                 }`}
