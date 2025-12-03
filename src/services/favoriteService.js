@@ -1,3 +1,4 @@
+// src/services/favoriteService.js
 import { supabase } from '../config/supabase';
 
 const favoriteService = {
@@ -49,9 +50,32 @@ const favoriteService = {
         if (deleteError) throw deleteError;
         return { success: true, action: 'removed' };
       } else {
+        
+        const { data: existingIds, error: idError } = await supabase
+          .from('favorites')
+          .select('id')
+          .order('id', { ascending: true });
+
+        if (idError) throw idError;
+
+        let nextId = 1;
+        if (existingIds && existingIds.length > 0) {
+          for (const item of existingIds) {
+            if (item.id === nextId) {
+              nextId++;
+            } else if (item.id > nextId) {
+              break;
+            }
+          }
+        }
+
         const { error: insertError } = await supabase
           .from('favorites')
-          .insert([{ user_identifier: userId, car_id: carId }]);
+          .insert([{ 
+            id: nextId,
+            user_identifier: userId, 
+            car_id: carId 
+          }]);
           
         if (insertError) throw insertError;
         return { success: true, action: 'added' };
