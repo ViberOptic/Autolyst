@@ -16,16 +16,16 @@ export default function AboutPage({ onNavigate }) {
     try {
       const { error } = await signOut();
       
-      if (error) {
-        if (error.message === "Auth session missing!") {
-          window.location.reload();
-          return;
-        }
-        throw error;
-      }
-    
+      if (error) throw error;
+      
     } catch (error) {
       console.error("Logout error:", error.message);
+      
+      if (error.message.includes("Auth session missing") || error.message.includes("session not found")) {
+        window.location.reload();
+        return;
+      }
+      
       alert("Gagal keluar: " + error.message);
     } finally {
       setIsLoading(false);
