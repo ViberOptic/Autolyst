@@ -15,7 +15,15 @@ export default function AboutPage({ onNavigate }) {
     
     try {
       const { error } = await signOut();
-      if (error) throw error;
+      
+      if (error) {
+        if (error.message === "Auth session missing!") {
+          window.location.reload();
+          return;
+        }
+        throw error;
+      }
+    
     } catch (error) {
       console.error("Logout error:", error.message);
       alert("Gagal keluar: " + error.message);
